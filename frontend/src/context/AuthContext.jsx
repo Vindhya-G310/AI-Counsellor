@@ -21,9 +21,11 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await authAPI.getMe();
       setUser(response.data.user);
-      setLoading(false);
     } catch (err) {
+      console.log("Auth failed, continuing as guest");
       localStorage.removeItem("token");
+      setUser(null);
+    } finally {
       setLoading(false);
     }
   };
