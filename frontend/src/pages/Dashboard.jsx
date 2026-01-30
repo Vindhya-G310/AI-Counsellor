@@ -1,4 +1,3 @@
-"use client";
 import { useAuth } from "../context/AuthContext";
 
 import React, { useState, useEffect } from "react";

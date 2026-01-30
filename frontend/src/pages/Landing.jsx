@@ -1,8 +1,6 @@
-'use client';
-
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export const Landing = () => {
   const navigate = useNavigate();
@@ -11,9 +9,9 @@ export const Landing = () => {
   React.useEffect(() => {
     if (user) {
       if (user.profileCompleted) {
-        navigate('/dashboard');
+        navigate("/dashboard");
       } else {
-        navigate('/onboarding');
+        navigate("/onboarding");
       }
     }
   }, [user, navigate]);
@@ -32,13 +30,13 @@ export const Landing = () => {
 
         <div className="flex gap-4 justify-center">
           <button
-            onClick={() => navigate('/auth/login')}
+            onClick={() => navigate("/auth/login")}
             className="btn-primary bg-white text-primary hover:bg-blue-50"
           >
             Login
           </button>
           <button
-            onClick={() => navigate('/auth/signup')}
+            onClick={() => navigate("/auth/signup")}
             className="btn-secondary bg-blue-700 text-white hover:bg-blue-800"
           >
             Sign Up

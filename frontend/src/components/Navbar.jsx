@@ -1,8 +1,6 @@
-'use client';
-
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export const Navbar = () => {
   const { user, logout } = useAuth();
@@ -11,14 +9,14 @@ export const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate("/");
   };
 
   const navLinks = [
-    { label: 'Dashboard', path: '/dashboard' },
-    { label: 'Universities', path: '/universities' },
-    { label: 'Counsellor', path: '/counsellor' },
-    { label: 'Applications', path: '/applications' },
+    { label: "Dashboard", path: "/dashboard" },
+    { label: "Universities", path: "/universities" },
+    { label: "Counsellor", path: "/counsellor" },
+    { label: "Applications", path: "/applications" },
   ];
 
   return (
@@ -70,10 +68,7 @@ export const Navbar = () => {
             ))}
             <div className="border-t pt-3 mt-3 space-y-2">
               <p className="text-gray-600 text-sm">{user?.name}</p>
-              <button
-                onClick={handleLogout}
-                className="btn-danger w-full"
-              >
+              <button onClick={handleLogout} className="btn-danger w-full">
                 Logout
               </button>
             </div>

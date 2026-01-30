@@ -1,20 +1,18 @@
-'use client';
-
-import React, { useState, useEffect } from 'react';
-import { tasksAPI } from '../services/api';
+import React, { useState, useEffect } from "react";
+import { tasksAPI } from "../services/api";
 
 export const Applications = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [newTask, setNewTask] = useState({
-    title: '',
-    description: '',
-    taskType: 'General',
-    priority: 'Medium',
-    dueDate: '',
+    title: "",
+    description: "",
+    taskType: "General",
+    priority: "Medium",
+    dueDate: "",
   });
   const [showForm, setShowForm] = useState(false);
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState("all");
 
   useEffect(() => {
     fetchTasks();
@@ -25,7 +23,7 @@ export const Applications = () => {
       const response = await tasksAPI.getAll({});
       setTasks(response.data);
     } catch (err) {
-      console.error('Failed to fetch tasks', err);
+      console.error("Failed to fetch tasks", err);
     } finally {
       setLoading(false);
     }
@@ -38,16 +36,16 @@ export const Applications = () => {
     try {
       await tasksAPI.create(newTask);
       setNewTask({
-        title: '',
-        description: '',
-        taskType: 'General',
-        priority: 'Medium',
-        dueDate: '',
+        title: "",
+        description: "",
+        taskType: "General",
+        priority: "Medium",
+        dueDate: "",
       });
       setShowForm(false);
       fetchTasks();
     } catch (err) {
-      console.error('Failed to add task', err);
+      console.error("Failed to add task", err);
     }
   };
 
@@ -56,24 +54,24 @@ export const Applications = () => {
       await tasksAPI.update(taskId, { completed: !currentStatus });
       fetchTasks();
     } catch (err) {
-      console.error('Failed to update task', err);
+      console.error("Failed to update task", err);
     }
   };
 
   const handleDeleteTask = async (taskId) => {
-    if (window.confirm('Are you sure?')) {
+    if (window.confirm("Are you sure?")) {
       try {
         await tasksAPI.delete(taskId);
         fetchTasks();
       } catch (err) {
-        console.error('Failed to delete task', err);
+        console.error("Failed to delete task", err);
       }
     }
   };
 
   const filteredTasks = tasks.filter((task) => {
-    if (filter === 'completed') return task.completed;
-    if (filter === 'pending') return !task.completed;
+    if (filter === "completed") return task.completed;
+    if (filter === "pending") return !task.completed;
     return true;
   });
 
@@ -104,7 +102,10 @@ export const Applications = () => {
               <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
                 <div className="text-center text-white">
                   <div className="text-3xl font-bold">
-                    {tasks.length > 0 ? Math.round((completedCount / tasks.length) * 100) : 0}%
+                    {tasks.length > 0
+                      ? Math.round((completedCount / tasks.length) * 100)
+                      : 0}
+                    %
                   </div>
                   <div className="text-sm">Complete</div>
                 </div>
@@ -120,7 +121,7 @@ export const Applications = () => {
             onClick={() => setShowForm(!showForm)}
             className="btn-primary"
           >
-            {showForm ? '✕ Cancel' : '+ Add Task'}
+            {showForm ? "✕ Cancel" : "+ Add Task"}
           </button>
         </div>
 
@@ -216,31 +217,31 @@ export const Applications = () => {
         <div className="mb-6">
           <div className="flex gap-2">
             <button
-              onClick={() => setFilter('all')}
+              onClick={() => setFilter("all")}
               className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                filter === 'all'
-                  ? 'bg-primary text-white'
-                  : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+                filter === "all"
+                  ? "bg-primary text-white"
+                  : "bg-gray-200 text-gray-800 hover:bg-gray-300"
               }`}
             >
               All ({tasks.length})
             </button>
             <button
-              onClick={() => setFilter('pending')}
+              onClick={() => setFilter("pending")}
               className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                filter === 'pending'
-                  ? 'bg-primary text-white'
-                  : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+                filter === "pending"
+                  ? "bg-primary text-white"
+                  : "bg-gray-200 text-gray-800 hover:bg-gray-300"
               }`}
             >
               Pending ({tasks.filter((t) => !t.completed).length})
             </button>
             <button
-              onClick={() => setFilter('completed')}
+              onClick={() => setFilter("completed")}
               className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                filter === 'completed'
-                  ? 'bg-primary text-white'
-                  : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+                filter === "completed"
+                  ? "bg-primary text-white"
+                  : "bg-gray-200 text-gray-800 hover:bg-gray-300"
               }`}
             >
               Completed ({completedCount})
@@ -271,19 +272,19 @@ export const Applications = () => {
                       <h3
                         className={`font-semibold text-lg ${
                           task.completed
-                            ? 'line-through text-gray-400'
-                            : 'text-gray-800'
+                            ? "line-through text-gray-400"
+                            : "text-gray-800"
                         }`}
                       >
                         {task.title}
                       </h3>
                       <span
                         className={`text-xs px-2 py-1 rounded-full font-semibold ${
-                          task.priority === 'High'
-                            ? 'bg-red-100 text-red-700'
-                            : task.priority === 'Medium'
-                            ? 'bg-yellow-100 text-yellow-700'
-                            : 'bg-green-100 text-green-700'
+                          task.priority === "High"
+                            ? "bg-red-100 text-red-700"
+                            : task.priority === "Medium"
+                              ? "bg-yellow-100 text-yellow-700"
+                              : "bg-green-100 text-green-700"
                         }`}
                       >
                         {task.priority}
@@ -296,7 +297,7 @@ export const Applications = () => {
                     {task.description && (
                       <p
                         className={`text-gray-600 mb-2 ${
-                          task.completed ? 'line-through' : ''
+                          task.completed ? "line-through" : ""
                         }`}
                       >
                         {task.description}
@@ -307,8 +308,7 @@ export const Applications = () => {
                       <div className="flex items-center gap-4">
                         {task.dueDate && (
                           <span className="text-gray-600">
-                            Due:{' '}
-                            {new Date(task.dueDate).toLocaleDateString()}
+                            Due: {new Date(task.dueDate).toLocaleDateString()}
                           </span>
                         )}
                         {task.generatedByAI && (

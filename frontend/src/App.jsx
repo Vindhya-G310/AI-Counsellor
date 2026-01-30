@@ -1,7 +1,11 @@
-"use client";
-
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { ProtectedRoute, OnboardingRoute } from "./components/ProtectedRoute";
 
@@ -82,7 +86,13 @@ const AppContent = () => {
 };
 
 function App() {
-  return <AppContent />;
+  return (
+    <Router>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </Router>
+  );
 }
 
 export default App;

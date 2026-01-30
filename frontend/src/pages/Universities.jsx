@@ -1,17 +1,15 @@
-'use client';
-
-import React, { useState, useEffect } from 'react';
-import { universitiesAPI } from '../services/api';
+import React, { useState, useEffect } from "react";
+import { universitiesAPI } from "../services/api";
 
 export const Universities = () => {
   const [universities, setUniversities] = useState([]);
   const [filteredUniversities, setFilteredUniversities] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [filters, setFilters] = useState({
-    country: '',
-    minBudget: '',
-    maxBudget: '',
+    country: "",
+    minBudget: "",
+    maxBudget: "",
   });
 
   useEffect(() => {
@@ -27,7 +25,7 @@ export const Universities = () => {
       const response = await universitiesAPI.getAll({});
       setUniversities(response.data);
     } catch (err) {
-      console.error('Failed to fetch universities', err);
+      console.error("Failed to fetch universities", err);
     } finally {
       setLoading(false);
     }
@@ -48,7 +46,7 @@ export const Universities = () => {
       result = result.filter((u) => u.avgCost <= Number(filters.maxBudget));
     }
 
-    if (selectedCategory !== 'all') {
+    if (selectedCategory !== "all") {
       result = result.filter((u) => u.category === selectedCategory);
     }
 
@@ -60,7 +58,7 @@ export const Universities = () => {
       await universitiesAPI.shortlist(universityId, { category });
       fetchUniversities();
     } catch (err) {
-      console.error('Failed to shortlist university', err);
+      console.error("Failed to shortlist university", err);
     }
   };
 
@@ -69,7 +67,7 @@ export const Universities = () => {
       await universitiesAPI.removeFromShortlist(universityId);
       fetchUniversities();
     } catch (err) {
-      console.error('Failed to remove from shortlist', err);
+      console.error("Failed to remove from shortlist", err);
     }
   };
 
@@ -78,7 +76,7 @@ export const Universities = () => {
       await universitiesAPI.lock(universityId);
       fetchUniversities();
     } catch (err) {
-      console.error('Failed to lock university', err);
+      console.error("Failed to lock university", err);
     }
   };
 
@@ -112,7 +110,9 @@ export const Universities = () => {
               <h3 className="font-semibold mb-4">Filters</h3>
 
               <div className="mb-6">
-                <label className="block text-sm font-medium mb-2">Country</label>
+                <label className="block text-sm font-medium mb-2">
+                  Country
+                </label>
                 <select
                   value={filters.country}
                   onChange={(e) =>
@@ -169,7 +169,7 @@ export const Universities = () => {
                       type="radio"
                       name="category"
                       value="all"
-                      checked={selectedCategory === 'all'}
+                      checked={selectedCategory === "all"}
                       onChange={(e) => setSelectedCategory(e.target.value)}
                       className="mr-2"
                     />
@@ -180,7 +180,7 @@ export const Universities = () => {
                       type="radio"
                       name="category"
                       value="Dream"
-                      checked={selectedCategory === 'Dream'}
+                      checked={selectedCategory === "Dream"}
                       onChange={(e) => setSelectedCategory(e.target.value)}
                       className="mr-2"
                     />
@@ -191,7 +191,7 @@ export const Universities = () => {
                       type="radio"
                       name="category"
                       value="Target"
-                      checked={selectedCategory === 'Target'}
+                      checked={selectedCategory === "Target"}
                       onChange={(e) => setSelectedCategory(e.target.value)}
                       className="mr-2"
                     />
@@ -202,7 +202,7 @@ export const Universities = () => {
                       type="radio"
                       name="category"
                       value="Safe"
-                      checked={selectedCategory === 'Safe'}
+                      checked={selectedCategory === "Safe"}
                       onChange={(e) => setSelectedCategory(e.target.value)}
                       className="mr-2"
                     />
@@ -277,23 +277,19 @@ export const Universities = () => {
                       {!uni.isShortlisted ? (
                         <>
                           <button
-                            onClick={() =>
-                              handleShortlist(uni._id, 'Dream')
-                            }
+                            onClick={() => handleShortlist(uni._id, "Dream")}
                             className="btn text-sm bg-purple-100 text-purple-700 hover:bg-purple-200"
                           >
                             Dream
                           </button>
                           <button
-                            onClick={() =>
-                              handleShortlist(uni._id, 'Target')
-                            }
+                            onClick={() => handleShortlist(uni._id, "Target")}
                             className="btn text-sm bg-blue-100 text-blue-700 hover:bg-blue-200"
                           >
                             Target
                           </button>
                           <button
-                            onClick={() => handleShortlist(uni._id, 'Safe')}
+                            onClick={() => handleShortlist(uni._id, "Safe")}
                             className="btn text-sm bg-green-100 text-green-700 hover:bg-green-200"
                           >
                             Safe
@@ -303,11 +299,11 @@ export const Universities = () => {
                         <>
                           <span
                             className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                              uni.category === 'Dream'
-                                ? 'bg-purple-100 text-purple-700'
-                                : uni.category === 'Target'
-                                ? 'bg-blue-100 text-blue-700'
-                                : 'bg-green-100 text-green-700'
+                              uni.category === "Dream"
+                                ? "bg-purple-100 text-purple-700"
+                                : uni.category === "Target"
+                                  ? "bg-blue-100 text-blue-700"
+                                  : "bg-green-100 text-green-700"
                             }`}
                           >
                             {uni.category}
@@ -321,9 +317,7 @@ export const Universities = () => {
                                 Lock
                               </button>
                               <button
-                                onClick={() =>
-                                  handleRemoveShortlist(uni._id)
-                                }
+                                onClick={() => handleRemoveShortlist(uni._id)}
                                 className="btn-danger text-sm"
                               >
                                 Remove
