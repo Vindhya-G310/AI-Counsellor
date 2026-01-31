@@ -8,15 +8,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      fetchUser();
-    } else {
-      setLoading(false);
-    }
-  }, []);
-
   const fetchUser = async () => {
     try {
       const response = await authAPI.getMe();
@@ -29,6 +20,15 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      fetchUser();
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
   const signup = async (name, email, password) => {
     try {
@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{ user, loading, error, signup, login, logout, fetchUser }}
     >
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };
