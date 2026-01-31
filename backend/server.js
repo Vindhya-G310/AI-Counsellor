@@ -10,7 +10,7 @@ connectDB();
 
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || "https://vindhya-g310.github.io",
+    origin: process.env.CORS_ORIGIN,
   }),
 );
 app.use(express.json());

@@ -5,7 +5,7 @@ const { requireUniversityLocked } = require("../middleware/stageGuard");
 
 const router = express.Router();
 
-router.get("/", auth, requireUniversityLocked, async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const { universityId } = req.query;
     const filter = { userId: req.userId };
@@ -21,7 +21,7 @@ router.get("/", auth, requireUniversityLocked, async (req, res) => {
   }
 });
 
-router.post("/", auth, requireUniversityLocked, async (req, res) => {
+router.post("/", auth, async (req, res) => {
   try {
     const { title, description, taskType, dueDate, universityId, priority } =
       req.body;
